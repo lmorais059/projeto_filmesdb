@@ -1,0 +1,24 @@
+{% extends "pages/base.html" %}
+{% block content %}
+
+<div>
+    <h1 style="background-color:rgb(115, 115, 172) !important; padding: 10px; margin-top: 10px;" class="text-center">Editando o filme</h1>
+
+</div>
+
+
+<form method="POST" style="margin-left: 2rem;">
+    {% csrf_token %}
+    <input type="text" name="nome" value="{{ filme.nome }}">
+    <input type="text" name="diretor" value="{{ filme.diretor }}">
+    <input type="number" name="ano" value="{{ filme.ano }}">
+    <input type="text" name="sinopse" value="{{ filme.sinopse }}">
+    <input type="text" name="imagem" value="{{ filme.imagem }}">
+    <input type="text" name="trailer_url" value="{{ filme.trailer_url }}">  
+    <!-- Adicione campos para a sinopse e a URL da imagem -->
+    <button class="btn-primary" type="submit">Salvar</button>
+</form>
+
+<a href="{% url 'filmes' %}"style="margin-left: 2rem;">Voltar</a>
+
+{% endblock %}

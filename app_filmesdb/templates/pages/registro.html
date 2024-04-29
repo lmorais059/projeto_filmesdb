@@ -1,0 +1,11 @@
+{% extends "pages/base.html" %}
+{% block content %}
+
+<h1 style="background-color:rgb(115, 115, 172) !important; padding: 10px; margin-top: 10px;" class="text-center">Registre-se</h1>
+<form method="post" style="margin-left: 2rem;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Registrar</button>
+</form>
+
+  {% endblock %}

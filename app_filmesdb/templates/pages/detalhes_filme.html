@@ -1,0 +1,71 @@
+{% extends "pages/base.html" %}
+{% block content %}
+
+<div>
+    <h1 style="background-color:rgb(115, 115, 172) !important; padding: 10px; margin-top: 10px;" class="text-center">Detalhes do filme</h1>
+
+</div>
+
+<div class="row" style="background-color: darkgray;">
+    <div class="col" style="margin-left: 5rem; margin-bottom: 2rem;">
+        <div class="card" style="width: 18rem; margin-left: 5rem; background-color: darkgray; border-radius: 5px; border-width: 2%; border-color: rgb(74, 3, 139);">
+            <h5 class="card-title">{{ filme.nome }}</h5>
+            <img src="{{ filme.imagem }}" class="card-img-top" alt="alguma coisa">
+            <div class="card-body">
+                <p class="card-text">{{ filme.sinopse }}</p>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Nota: {{ filme.rating }} <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE8aglZykyiH64x3h4JSmLK_5VCHnfsgnCVg&s" class="card-img-top img-fuild" alt="Rating"></p> </div>
+            <div class="card-body">
+                <a href="{% url 'editar_filme' filme.id_filme %}" class="card-link">Editar</a>
+                <a href="{% url 'filmes' %}" class="card-link">Voltar</a>
+            </div>
+        </div>
+    </div>
+    <div class="col" style="margin-left: 3rem; padding-left: 0rem; background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPEheQ1Bsg24h-v0oJFYXVa7S7HBulvl6qiQ&s'); background-repeat:repeat-x; background-size: 27rem; background-color: darkgrey;">
+        <div>
+            <h2 style="background-color:rgb(141, 45, 61) !important; text-align: center;">Classificação</h2></br></br></br>
+            <form action="{% url 'classificar_filme' filme.id_filme %}" method="post">
+                {% csrf_token %}
+                <label for="rating" style="font-weight: bolder; margin-left: 1rem;">Rating:</label>
+                <input type="number" id="rating" name="rating" min="0" max="10" required>
+                <button type="submit" style="color: rgb(45, 8, 78); background-color: aquamarine; font-style: italic; font-weight: bold;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; ">Classificar</button> 
+            </form>
+        </div>
+    </br>
+        <div>
+            <h2 style="background-color:rgb(141, 45, 61) !important; text-align: center;">Comente aqui!</h2> 
+            <form action="{% url 'adicionar_comentario' filme.id_filme %}" method="post">
+                {% csrf_token %}
+                <label for="comentario" style="font-weight: bolder; ">Faça sua crítica:</label><br>
+                <textarea id="comentario" name="comentario" rows="4" cols="60" maxlength="500" required></textarea><br>
+                <button type="submit" style="color: rgb(45, 8, 78); background-color: aquamarine;font-style: italic; font-weight: bold;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Adicionar Comentário</button>
+            </form>
+        </br>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#comentariosCollapse" aria-expanded="false" aria-controls="comentariosCollapse">
+                Ver Comentários
+            </button>
+            <div class="collapse" id="comentariosCollapse">
+                <div class="card card-body">
+                    <p>{{ filme.comentario}}</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <h2 style="background-color:rgb(115, 115, 172) !important; padding: 10px; margin-top: 10px;" class="text-center">Trailer do Filme</h2>
+    <div class="card mb-3">
+        <div class="card-body" style="background-color: darkgray; border-color: darkgrey;">
+            <h5 class="card-title">{{ filme.nome }}</h5>
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe width="1280" height="720" src="{{ filme.trailer_url }}" title="RED ROOMS Trailer | TIFF 2023" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

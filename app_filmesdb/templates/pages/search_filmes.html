@@ -1,0 +1,26 @@
+{% extends "pages/base.html" %}
+{% block content %}
+
+<div>
+    <h1 style="background-color:rgb(115, 115, 172) !important; padding: 10px; margin-top: 10px;" class="text-center">Procure um filme</h1>
+
+</div>
+
+<div class="container-fluid" style="background-color: darkgrey; text-align: left; margin-left: 2rem;">
+    <form method="post" class="meu-formulario">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn-success" type="submit">Buscar</button>
+    </form>
+</div>
+
+<style>
+    .meu-formulario p, .meu-formulario input {
+        /* Adicione seus estilos aqui. Por exemplo: */
+        width: 100%; /* Faz com que o elemento ocupe toda a largura disponível */
+        text-align: left; /* Alinha o texto à esquerda */
+        padding-right: 80%;
+    }
+    </style>
+
+{% endblock %}

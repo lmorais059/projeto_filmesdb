@@ -1,0 +1,48 @@
+{% extends "pages/base.html" %}
+{% block content %}
+
+<div class="container-fluid">
+    <h1 style="background-color:rgb(115, 115, 172) !important; padding: 10px; margin-top: 1rem;"  class="text-center">Filmes</h1>
+    <table style="padding: 10px;" class="table table-dark table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Diretor</th>
+          <th scope="col">Ano</th>
+          <th scope="col" style="text-align: center; padding-right: 10px;">Ações</th>
+        </tr>
+      </thead>
+       <tbody>
+    {% for filme in filmes %}
+    <tr>
+        <th scope="row">{{ filme.id_filme}}</th>
+        <td>{{ filme.nome }}</td>
+        <td>{{ filme.diretor }}</td>
+        <td>{{ filme.ano }}</td>
+        <td>
+          <div class="row">
+            <div class="col">
+                <form action="{% url 'delete_filme' filme.id_filme %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-block">Deletar</button>
+                </form>
+            </div>
+            <div class="col">
+              <a href="{% url 'editar_filme' filme.id_filme %}" class="btn btn-primary">Editar</a>
+            </div>
+        
+            <div class="col">
+                <form action="{% url 'detalhes_filme' filme.id_filme %}" method="get">
+                    <button type="submit" class="btn btn-success btn-block">Detalhes</button>
+                </form>
+            </div>
+          </div>
+        </td>
+    </tr>
+    {% endfor %}
+     </tbody>
+    </table>
+  </div>
+
+{% endblock %}

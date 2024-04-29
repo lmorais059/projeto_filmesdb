@@ -1,0 +1,59 @@
+{% extends 'pages/base.html' %}
+{% block content %}
+    <div style="padding: 10px;" class="container-fluid">
+      <h1 style="background-color:rgb(115, 115, 172) !important;" class="text-center">Adicionar filme</h1>
+      <form action="{% url 'filmes' %}" method="post">
+        {% csrf_token %}
+        <div style="text-align: center;" class="row">
+          <div class="col">
+            <input  name="nome" type="text" class="form-control-sm" placeholder="Nome do filme">
+          </div>
+          <div class="col">
+            <input name="diretor" type="text" class="form-control-sm" placeholder="Diretor do filme">
+          </div>
+          <div class="col">
+            <input name="ano" type="number" class="form-control-sm" placeholder="Ano do filme">
+          </div>
+          <div class="col">
+            <input name="sinopse" type="text" class="form-control-sm" placeholder="Sinopse do filme">
+        </div>
+        <div class="col">
+            <input name="imagem" type="text" class="form-control-sm" placeholder="URL da imagem do filme">
+        </div>
+          <div class="col">
+            <button class="form-control-sm btn-primary" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bold; color: #000;"> Adicionar </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="container-fluid">
+      <h1 style="background-color:rgb(115, 115, 172) !important; padding: 10px;"  class="text-center">Últimos títulos</h1>
+      <table style="padding: 10px;" class="table table-dark table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Diretor</th>
+            <th scope="col">Ano</th>
+            <th scope="col" style="text-align: left; padding-right: 10px;">Editar</th>
+          </tr>
+        </thead>
+         <tbody>
+      {% for filme in filmes %}
+      <tr>
+          <th scope="row">{{ filme.id_filme}}</th>
+          <td>{{ filme.nome }}</td>
+          <td>{{ filme.diretor }}</td>
+          <td>{{ filme.ano }}</td>
+          <td>
+              <form action="{% url 'detalhes_filme' filme.id_filme %}" method="get">
+                  <button type="submit" class="btn btn-primary btn-block">Detalhes</button>
+              </form>
+        </td>
+        
+      </tr>
+      {% endfor %}
+       </tbody>
+      </table>
+    </div>
+{% endblock %}

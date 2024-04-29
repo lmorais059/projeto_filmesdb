@@ -1,0 +1,37 @@
+{% extends "pages/base.html" %}
+{% block content %}
+
+<div>
+    <h1 style="background-color:rgb(115, 115, 172) !important; padding: 10px; margin-top: 10px;" class="text-center">Resultados da Pesquisa</h1>
+
+</div>
+
+{% if filmes %}
+        <table style="padding: 10px;" class="table table-dark table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Diretor</th>
+                <th scope="col">Ano</th>
+                <th scope="col">Nota</th>
+            </tr>
+            </thead>
+            <tbody>
+        {% for filme in filmes %}
+        <tr>
+            <th scope="row">{{ filme.id_filme}}</th>
+            <td>{{ filme.nome }}</td>
+            <td>{{ filme.diretor }}</td>
+            <td>{{ filme.ano }}</td>
+            <td>{{ filme.rating }}</td>
+            </td>
+        </tr>
+    {% endfor %}
+{% else %}
+    <p style="margin-left: 1rem; font-weight: bolder;">Nenhum filme encontrado.</p>
+{% endif %}
+
+
+
+{% endblock %}
