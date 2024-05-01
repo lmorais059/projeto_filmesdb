@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+    path('', views.home, name='home'),
     path('admin/', admin.site.urls),
     path('contas/', include('django.contrib.auth.urls')),
     path('home', views.home, name='home'),
@@ -18,5 +19,6 @@ urlpatterns = [
     path('search_filmes/', views.search_filmes, name='search_filmes'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('registro/', views.registro, name='registro')
+    path('registro/', views.registro, name='registro'),
+    path('404/', views.error_404, name='404')
 ]

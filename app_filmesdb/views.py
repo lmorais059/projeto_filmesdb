@@ -3,8 +3,6 @@ from .models import Filme
 from .forms import FilmeSearchForm
 from django.contrib.auth.forms import UserCreationForm
 
-# Create your views here.
-
 def home(request):
     
     ultimos_filmes = Filme.objects.order_by('-id_filme')[:10]
@@ -102,3 +100,6 @@ def registro(request):
     else:
         form = UserCreationForm()
     return render(request, 'pages/registro.html', {'form': form})
+
+def error_404(request, exception=None):
+    return render(request, 'pages/404.html', status=404)
